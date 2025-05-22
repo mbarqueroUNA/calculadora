@@ -8,7 +8,7 @@
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Font Awesome para íconos -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Estilos personalizados -->
@@ -99,39 +99,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- JS personalizado -->
-   <script>
-    // Ocultar resultado después de 5 segundos
-    setTimeout(() => {
-        const resultado = document.getElementById('resultado');
-        if (resultado) {
-            resultado.style.transition = 'opacity 1s';
-            resultado.style.opacity = '0';
+    <script>
+        function resetForm() {
+            const form = document.getElementById('calc-form');
+            form.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
+            form.querySelector('select[name="op"]').selectedIndex = 0;
+
+            const resultado = document.getElementById('resultado');
+            if (resultado) {
+                resultado.remove();
+            }
         }
-    }, 5000);
-
-    // Reset manual del formulario para evitar conflicto con old()
-    function resetForm() {
-        const form = document.getElementById('calc-form');
-        form.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
-        form.querySelector('select[name="op"]').selectedIndex = 0;
-
-        const resultado = document.getElementById('resultado');
-        if (resultado) {
-            resultado.style.opacity = '0';
-        }
-    }
-
-    // Validación adicional (opcional): evitar división por cero
-    document.getElementById('calc-form').addEventListener('submit', function(e) {
-        const op = document.getElementById('op').value;
-        const b = parseFloat(document.getElementById('b').value);
-
-        if (op === 'dividir' && b === 0) {
-            e.preventDefault();
-            alert('No se puede dividir por cero');
-        }
-    });
-</script>
+    </script>
 
 </body>
 </html>
